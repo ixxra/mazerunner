@@ -23,7 +23,7 @@ class Rover:
     On construction, the rover is positioned at (0, 0) in the map.
     '''
     def __init__(self, Map):
-        self.Map = Map
+        self.Map = [row[:] for row in Map]
         self.i = 0
         self.j = 0
         self.rows = len(Map)
@@ -113,29 +113,20 @@ def explore(map):
     Write an algorithm to reach the goal here.
     '''
     rover = Rover(map)
-    while rover.pos() != rover.goal():
-        if rover.right() or rover.down() or rover.left():
-            print rover.pos()
-        else:
-            print 'We are dead Jim >_<'
-    
+    try:
+        while rover.pos() != rover.goal():
+            if rover.right() or rover.down():
+                print rover.pos()
+            elif rover.left() or rover.down():
+                print rover.pos()
+            else:
+                print 'We are dead Jim >_<'
+    except KeyboardInterrupt:
+        print rover.map()
         
         
 if __name__ == '__main__':
     explore(MAP)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
